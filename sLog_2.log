@@ -1,0 +1,280 @@
+2018-05-28 09:06:04 UTC
+
+========================================
+== Contract Fantom Token initialized
+== 
+At address 0x5d0D003e43d945FaF5F949177760DFb0D94Cd45d
+
+========================================
+== Jump to: epoch 50
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [at_now acc]  is 50 as expected
+
+DIFFERENCES
+[:c, :at_now, 150, 50, -100]
+
+===============================================================================
+============ Minting
+===============================================================================
+
+========================================
+== Mint unrestricted tokens
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [balance_of acc1] 1 is 50000000000000000000000000 as expected
+ok  diff [balance_of acc1] is 50000000000000000000000000 as expected
+ok  val [balances_minted_by_type acc]  is 50000000000000000000000000 as expected
+ok  diff [balances_minted_by_type acc] is 50000000000000000000000000 as expected
+ok  val [balances_minted_by_type acc]  is 0 as expected
+ok  diff [balances_minted_by_type acc] is 0 as expected
+ok  val [balance_of acc2] 2 is 10000000000000000000000000 as expected
+ok  diff [balance_of acc2] is 10000000000000000000000000 as expected
+ok  val [balances_minted_by_type acc]  is 10000000000000000000000000 as expected
+ok  diff [balances_minted_by_type acc] is 10000000000000000000000000 as expected
+ok  val [balance_of acc3] 3 is 10000000000000000000000000 as expected
+ok  diff [balance_of acc3] is 10000000000000000000000000 as expected
+ok  val [balances_minted_by_type acc]  is 10000000000000000000000000 as expected
+ok  diff [balances_minted_by_type acc] is 10000000000000000000000000 as expected
+ok  val [balance_of acc4] 4 is 10000000000000000000000000 as expected
+ok  diff [balance_of acc4] is 10000000000000000000000000 as expected
+ok  val [balances_minted_by_type acc]  is 10000000000000000000000000 as expected
+ok  diff [balances_minted_by_type acc] is 10000000000000000000000000 as expected
+ok  val [balance_of acc5] 5 is 10000000000000000000000000 as expected
+ok  diff [balance_of acc5] is 10000000000000000000000000 as expected
+ok  val [balances_minted_by_type acc]  is 10000000000000000000000000 as expected
+ok  diff [balances_minted_by_type acc] is 10000000000000000000000000 as expected
+ok  val [balance_of acc6] 6 is 10000000000000000000000000 as expected
+ok  diff [balance_of acc6] is 10000000000000000000000000 as expected
+ok  val [balances_minted_by_type acc]  is 10000000000000000000000000 as expected
+ok  diff [balances_minted_by_type acc] is 10000000000000000000000000 as expected
+ok  val [balance_of acc11] 11 is 0 as expected
+ok  diff [balance_of acc11] is 0 as expected
+ok  val [available_to_mint acc]  is 300000000000000000000000000 as expected
+ok  diff [available_to_mint acc] is -100000000000000000000000000 as expected
+
+DIFFERENCES
+[:c, :tokens_minted, 0.0, 100000000.0, 100000000.0]
+[:c, :available_to_mint, 400000000.0, 300000000.0, -100000000.0]
+[1, :balance_of, 0.0, 50000000.0, 50000000.0]
+[1, :balances_minted, 0, 50000000000000000000000000, 50000000000000000000000000]
+[1, :unlocked_tokens, 0.0, 50000000.0, 50000000.0]
+[2, :balance_of, 0.0, 10000000.0, 10000000.0]
+[2, :balances_minted, 0, 10000000000000000000000000, 10000000000000000000000000]
+[2, :unlocked_tokens, 0.0, 10000000.0, 10000000.0]
+[3, :balance_of, 0.0, 10000000.0, 10000000.0]
+[3, :balances_minted, 0, 10000000000000000000000000, 10000000000000000000000000]
+[3, :unlocked_tokens, 0.0, 10000000.0, 10000000.0]
+[4, :balance_of, 0.0, 10000000.0, 10000000.0]
+[4, :balances_minted, 0, 10000000000000000000000000, 10000000000000000000000000]
+[4, :unlocked_tokens, 0.0, 10000000.0, 10000000.0]
+[5, :balance_of, 0.0, 10000000.0, 10000000.0]
+[5, :balances_minted, 0, 10000000000000000000000000, 10000000000000000000000000]
+[5, :unlocked_tokens, 0.0, 10000000.0, 10000000.0]
+[6, :balance_of, 0.0, 10000000.0, 10000000.0]
+[6, :balances_minted, 0, 10000000000000000000000000, 10000000000000000000000000]
+[6, :unlocked_tokens, 0.0, 10000000.0, 10000000.0]
+
+========================================
+== Mint locked tokens - fail because we only have 5 slots
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [balance_of acc10] 10 is 0 as expected
+ok  diff [balance_of acc10] is 0 as expected
+
+DIFFERENCES
+(no differences found)
+
+========================================
+== Mint locked tokens
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [balance_of acc10] 10 is 50000000000000000000000000 as expected
+ok  diff [balance_of acc10] is 50000000000000000000000000 as expected
+ok  val [locked_tokens acc10] 10 is 50000000000000000000000000 as expected
+ok  diff [locked_tokens acc10] is 50000000000000000000000000 as expected
+ok  val [unlocked_tokens acc10] 10 is 0 as expected
+ok  val [is_available_lock_slot acc]  is true as expected
+ok  val [is_available_lock_slot acc]  is false as expected
+ok  val [is_available_lock_slot acc]  is false as expected
+ok  val [available_to_mint acc]  is 250000000000000000000000000 as expected
+ok  diff [available_to_mint acc] is -50000000000000000000000000 as expected
+
+DIFFERENCES
+[:c, :tokens_minted, 100000000.0, 150000000.0, 50000000.0]
+[:c, :available_to_mint, 300000000.0, 250000000.0, -50000000.0]
+[10, :balance_of, 0.0, 50000000.0, 50000000.0]
+[10, :balances_minted, 0, 50000000000000000000000000, 50000000000000000000000000]
+[10, :locked_tokens, 0.0, 50000000.0, 50000000.0]
+
+========================================
+== Jump to: epoch 100
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [at_now acc]  is 100 as expected
+
+DIFFERENCES
+[:c, :at_now, 50, 100, 50]
+
+========================================
+== Still no lock slot
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [is_available_lock_slot acc]  is false as expected
+
+DIFFERENCES
+(no differences found)
+
+========================================
+== Jump to: epoch 101
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [at_now acc]  is 101 as expected
+
+DIFFERENCES
+[:c, :at_now, 100, 101, 1]
+[10, :locked_tokens, 50000000.0, 40000000.0, -10000000.0]
+[10, :unlocked_tokens, 0.0, 10000000.0, 10000000.0]
+
+========================================
+== Now we should have a lock slot
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [is_available_lock_slot acc]  is true as expected
+ok  val [locked_tokens acc10] 10 is 40000000000000000000000000 as expected
+ok  diff [locked_tokens acc10] is 0 as expected
+
+DIFFERENCES
+(no differences found)
+
+========================================
+== Now we should have a single lock slot
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [balance_of acc10] 10 is 70000000000000000000000000 as expected
+ok  diff [balance_of acc10] is 20000000000000000000000000 as expected
+ok  val [locked_tokens acc10] 10 is 60000000000000000000000000 as expected
+ok  diff [locked_tokens acc10] is 20000000000000000000000000 as expected
+ok  diff [unlocked_tokens acc10] is 0 as expected
+ok  val [is_available_lock_slot acc]  is false as expected
+ok  val [available_to_mint acc]  is 230000000000000000000000000 as expected
+ok  diff [available_to_mint acc] is -20000000000000000000000000 as expected
+
+DIFFERENCES
+[:c, :tokens_minted, 150000000.0, 170000000.0, 20000000.0]
+[:c, :available_to_mint, 250000000.0, 230000000.0, -20000000.0]
+[10, :balance_of, 50000000.0, 70000000.0, 20000000.0]
+[10, :balances_minted, 50000000000000000000000000, 70000000000000000000000000, 20000000000000000000000000]
+[10, :locked_tokens, 40000000.0, 60000000.0, 20000000.0]
+
+========================================
+== Jump to: epoch 200
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [at_now acc]  is 200 as expected
+
+DIFFERENCES
+[:c, :at_now, 101, 200, 99]
+
+========================================
+== Still no lock slot
+== 
+
+ACTIONS
+
+VERIFY
+ok  diff [unlocked_tokens acc10] is 0 as expected
+ok  val [is_available_lock_slot acc]  is false as expected
+
+DIFFERENCES
+(no differences found)
+
+========================================
+== Jump to: epoch 201
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [at_now acc]  is 201 as expected
+
+DIFFERENCES
+[:c, :at_now, 200, 201, 1]
+[10, :locked_tokens, 60000000.0, 50000000.0, -10000000.0]
+[10, :unlocked_tokens, 10000000.0, 20000000.0, 10000000.0]
+
+========================================
+== Now there is another lock slot
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [unlocked_tokens acc10] 10 is 20000000000000000000000000 as expected
+ok  diff [unlocked_tokens acc10] is 0 as expected
+ok  val [is_available_lock_slot acc]  is true as expected
+ok  val [may_have_locked_tokens acc10] 10 is true as expected
+
+DIFFERENCES
+(no differences found)
+
+========================================
+== Jump to: epoch 901
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [at_now acc]  is 901 as expected
+
+DIFFERENCES
+[:c, :at_now, 201, 901, 700]
+[10, :locked_tokens, 50000000.0, 0.0, -50000000.0]
+[10, :unlocked_tokens, 20000000.0, 70000000.0, 50000000.0]
+
+========================================
+== Now we should have nothing locked...
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [unlocked_tokens acc10] 10 is 70000000000000000000000000 as expected
+ok  val [may_have_locked_tokens acc10] 10 is true as expected
+
+DIFFERENCES
+(no differences found)
+
+Errors found: 0
+
+2018-05-28 09:07:07 UTC

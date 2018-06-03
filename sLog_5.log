@@ -1,0 +1,82 @@
+2018-05-28 09:08:57 UTC
+
+========================================
+== Contract Fantom Token initialized
+== 
+At address 0x5d0D003e43d945FaF5F949177760DFb0D94Cd45d
+
+===============================================================================
+============ Migration / token exchange
+===============================================================================
+
+========================================
+== Token exchange - fails
+== 
+
+ACTIONS
+
+VERIFY
+ok  diff [balance_of acc2] is 0 as expected
+ok  diff [tokens_issued_total acc] is 0 as expected
+
+DIFFERENCES
+[2, :get_balance, 961614.0658586416, 961613.9778586418, -0.088]
+
+========================================
+== Open token exchange
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [is_migration_phase_open acc]  is true as expected
+
+DIFFERENCES
+[:c, :is_migration_phase_open, false, true]
+
+========================================
+== Token exchange - ok
+== 
+
+ACTIONS
+
+VERIFY
+ok  diff [balance_of acc2] is -1000000000000000000000000 as expected
+ok  diff [tokens_issued_total acc] is -1000000000000000000000000 as expected
+
+DIFFERENCES
+[2, :get_balance, 961613.9778586418, 961613.9770220697, -0.000836572]
+[2, :balance_of, 70000000.0, 69000000.0, -1000000.0]
+[2, :unlocked_tokens, 70000000.0, 69000000.0, -1000000.0]
+
+========================================
+== Token exchange - too much
+== 
+
+ACTIONS
+
+VERIFY
+ok  diff [balance_of acc2] is 0 as expected
+ok  diff [tokens_issued_total acc] is 0 as expected
+
+DIFFERENCES
+[2, :get_balance, 961613.9770220697, 961613.8890220698, -0.088]
+
+========================================
+== Token exchange all - ok
+== 
+
+ACTIONS
+
+VERIFY
+ok  diff [balance_of acc2] is -69000000000000000000000000 as expected
+ok  diff [tokens_issued_total acc] is -69000000000000000000000000 as expected
+
+DIFFERENCES
+[2, :get_balance, 961613.8890220698, 961613.8885058177, -0.000516252]
+[2, :balance_of, 69000000.0, 0.0, -69000000.0]
+[2, :unlocked_tokens, 69000000.0, 0.0, -69000000.0]
+
+Errors found: 0
+
+2018-05-28 09:09:48 UTC

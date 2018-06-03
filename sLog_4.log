@@ -1,0 +1,220 @@
+2018-05-28 09:07:54 UTC
+
+========================================
+== Contract Fantom Token initialized
+== 
+At address 0x5d0D003e43d945FaF5F949177760DFb0D94Cd45d
+
+===============================================================================
+============ Main day one
+===============================================================================
+
+========================================
+== Jump to: presale start + 0
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [at_now acc]  is 1541685601 as expected
+
+DIFFERENCES
+[:c, :at_now, 50, 1541685601, 1541685551]
+[10, :locked_tokens, 60000000.0, 0.0, -60000000.0]
+[10, :unlocked_tokens, 10000000.0, 70000000.0, 60000000.0]
+
+========================================
+== Modify tokens per ETH (not during presale) and whitelisting (not on first day)
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [tokens_per_eth acc]  is 10000 as expected
+ok  diff [tokens_per_eth acc] is 0 as expected
+ok  val [whitelist acc13] 13 is false as expected
+ok  val [is_main_first_day acc]  is true as expected
+ok  val [is_migration_phase_open acc]  is false as expected
+
+DIFFERENCES
+(no differences found)
+
+========================================
+== Big contribution (over limit)
+== 
+
+ACTIONS
+CONTRIBUTE : @client.transfer(acct_#<Eth::Key:0x0000000004217790>, 0x5d0D003e43d945FaF5F949177760DFb0D94Cd45d, 10000)
+
+VERIFY
+ok  diff [balance_of acc1] is 60000000000000000000000000 as expected
+ok  diff [get_balance acc1] is ≈-6000000000000000000000 as expected (within 0.1 ether)
+
+DIFFERENCES
+[:c, :tokens_main, 0.0, 60000000.0, 60000000.0]
+[:c, :total_eth_contributed, 0.0, 6000.0, 6000.0]
+[1, :get_balance, 911159.4126707157, 905159.4096536797, -6000.0030170360005]
+[1, :balance_of, 50000000.0, 110000000.0, 60000000.0]
+[1, :balances_main, 0, 60000000000000000000000000, 60000000000000000000000000]
+[1, :eth_contributed, 0.0, 6000.0, 6000.0]
+[1, :unlocked_tokens, 50000000.0, 110000000.0, 60000000.0]
+
+========================================
+== Big contribution (over limit)
+== 
+
+ACTIONS
+CONTRIBUTE : @client.transfer(acct_#<Eth::Key:0x0000000004216f20>, 0x5d0D003e43d945FaF5F949177760DFb0D94Cd45d, 5900)
+CONTRIBUTE : @client.transfer(acct_#<Eth::Key:0x0000000004216f20>, 0x5d0D003e43d945FaF5F949177760DFb0D94Cd45d, 99.6)
+CONTRIBUTE : @client.transfer(acct_#<Eth::Key:0x0000000004216f20>, 0x5d0D003e43d945FaF5F949177760DFb0D94Cd45d, 1)
+
+VERIFY
+ok  diff [balance_of acc2] is 60000000000000000000000000 as expected
+ok  diff [get_balance acc2] is ≈-6000000000000000000000 as expected (within 0.1 ether)
+
+DIFFERENCES
+[:c, :tokens_main, 60000000.0, 120000000.0, 60000000.0]
+[:c, :total_eth_contributed, 6000.0, 12000.0, 6000.0]
+[2, :get_balance, 967614.0712574858, 961614.0658586416, -6000.0053988439995]
+[2, :balance_of, 10000000.0, 70000000.0, 60000000.0]
+[2, :balances_main, 0, 60000000000000000000000000, 60000000000000000000000000]
+[2, :eth_contributed, 0.0, 6000.0, 6000.0]
+[2, :unlocked_tokens, 10000000.0, 70000000.0, 60000000.0]
+
+========================================
+== Small contribution - fails because not whitelisting
+== 
+
+ACTIONS
+CONTRIBUTE : @client.transfer(acct_#<Eth::Key:0x00000000041fddb8>, 0x5d0D003e43d945FaF5F949177760DFb0D94Cd45d, 100)
+
+VERIFY
+ok  diff [balance_of acc13] is 0 as expected
+ok  diff [get_balance acc13] is ≈0 as expected (within 0.1 ether)
+
+DIFFERENCES
+[13, :get_balance, 999597.606390254, 999597.518390254, -0.088]
+
+===============================================================================
+============ Main after day one
+===============================================================================
+
+========================================
+== Jump to: presale after day one
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [at_now acc]  is 1542549599 as expected
+
+DIFFERENCES
+[:c, :at_now, 1541685601, 1542549599, 863998]
+
+========================================
+== Modify tokens per ETH (still not) and whitelisting (now ok)
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [tokens_per_eth acc]  is 10000 as expected
+ok  diff [tokens_per_eth acc] is 0 as expected
+ok  val [whitelist acc14] 14 is true as expected
+ok  val [is_main_first_day acc]  is false as expected
+
+DIFFERENCES
+[:c, :number_whitelisted, 10, 11, 1]
+[:c, :first_day_token_limit, 60000000.0, 54545454.54545454, -5454545.454545454]
+[14, :whitelist, false, true]
+
+========================================
+== A big contribution from 8
+== 
+
+ACTIONS
+CONTRIBUTE : @client.transfer(acct_#<Eth::Key:0x0000000004206148>, 0x5d0D003e43d945FaF5F949177760DFb0D94Cd45d, 10000)
+
+VERIFY
+ok  diff [balance_of acc8] is 100000000000000000000000000 as expected
+ok  diff [get_balance acc8] is ≈-10000000000000000000000 as expected (within 0.1 ether)
+ok  val [tokens_minted acc]  is 170000000000000000000000000 as expected
+ok  val [tokens_main acc]  is 220000000000000000000000000 as expected
+ok  val [tokens_issued_total acc]  is 390000000000000000000000000 as expected
+ok  val [available_to_mint acc]  is 230000000000000000000000000 as expected
+ok  val [total_eth_contributed acc]  is 22000000000000000000000 as expected
+
+DIFFERENCES
+[:c, :tokens_main, 120000000.0, 220000000.0, 100000000.0]
+[:c, :total_eth_contributed, 12000.0, 22000.0, 10000.0]
+[8, :get_balance, 797999.641569972, 787999.6390520941, -10000.002517878]
+[8, :balance_of, 0.0, 100000000.0, 100000000.0]
+[8, :balances_main, 0, 100000000000000000000000000, 100000000000000000000000000]
+[8, :eth_contributed, 0.0, 10000.0, 10000.0]
+[8, :unlocked_tokens, 0.0, 100000000.0, 100000000.0]
+
+===============================================================================
+============ After main sale
+===============================================================================
+
+========================================
+== Jump to: presale after day one
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [at_now acc]  is 1542549601 as expected
+
+DIFFERENCES
+[:c, :at_now, 1542549599, 1542549601, 2]
+
+========================================
+== No contribution possible any more
+== 
+
+ACTIONS
+CONTRIBUTE : @client.transfer(acct_#<Eth::Key:0x00000000041ff168>, 0x5d0D003e43d945FaF5F949177760DFb0D94Cd45d, 1)
+
+VERIFY
+ok  diff [balance_of acc10] is 0 as expected
+ok  diff [get_balance acc10] is ≈0 as expected (within 0.1 ether)
+
+DIFFERENCES
+[10, :get_balance, 999998.927677738, 999998.839677738, -0.088]
+
+========================================
+== Transfers not yet possible
+== 
+
+ACTIONS
+
+VERIFY
+ok  diff [balance_of acc7] is 0 as expected
+ok  diff [balance_of acc17] is 0 as expected
+
+DIFFERENCES
+[7, :get_balance, 977000.22953931, 977000.1415393099, -0.088]
+
+========================================
+== Owner makes transferable - transfers ok
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [tokens_tradeable acc]  is true as expected
+ok  diff [balance_of acc1] is -1000000000000000000000000 as expected
+ok  diff [balance_of acc15] is 1000000000000000000000000 as expected
+
+DIFFERENCES
+[:c, :tokens_tradeable, false, true]
+[1, :get_balance, 905159.4096536797, 905159.4084663618, -0.001187318]
+[1, :balance_of, 110000000.0, 109000000.0, -1000000.0]
+[1, :unlocked_tokens, 110000000.0, 109000000.0, -1000000.0]
+[15, :balance_of, 0.0, 1000000.0, 1000000.0]
+[15, :unlocked_tokens, 0.0, 1000000.0, 1000000.0]
+
+Errors found: 0
+
+2018-05-28 09:08:53 UTC

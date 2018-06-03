@@ -1,0 +1,184 @@
+2018-05-28 09:05:02 UTC
+
+========================================
+== Contract Fantom Token initialized
+== 
+At address 0x5d0D003e43d945FaF5F949177760DFb0D94Cd45d
+
+===============================================================================
+============ Preliminary actions
+===============================================================================
+
+========================================
+== Set wallet and admin account
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [wallet acc]  is f895b6041f3953b529910ba5ec50ec9a3320dc5a as expected
+ok  val [is_admin acc]  is true as expected
+
+DIFFERENCES
+[:c, :wallet, "7df97252dba710b75a5364bf4bcddf12c9e4559d", "f895b6041f3953b529910ba5ec50ec9a3320dc5a"]
+
+===============================================================================
+============ Some whitelisting
+===============================================================================
+
+========================================
+== Some whitelisting
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [whitelist acc1] 1 is true as expected
+ok  val [whitelist acc2] 2 is true as expected
+ok  val [whitelist acc3] 3 is true as expected
+ok  val [whitelist acc4] 4 is true as expected
+ok  val [whitelist acc5] 5 is true as expected
+ok  val [whitelist acc6] 6 is true as expected
+ok  val [whitelist acc7] 7 is true as expected
+ok  val [whitelist acc8] 8 is true as expected
+ok  val [whitelist acc9] 9 is true as expected
+ok  val [whitelist acc10] 10 is true as expected
+ok  val [whitelist acc11] 11 is false as expected
+ok  val [number_whitelisted acc]  is 10 as expected
+ok  diff [number_whitelisted acc] is 10 as expected
+
+DIFFERENCES
+[:c, :number_whitelisted, 0, 10, 10]
+[:c, :first_day_token_limit, 0.0, 60000000.0, 60000000.0]
+[1, :whitelist, false, true]
+[2, :whitelist, false, true]
+[3, :whitelist, false, true]
+[4, :whitelist, false, true]
+[5, :whitelist, false, true]
+[6, :whitelist, false, true]
+[7, :whitelist, false, true]
+[8, :whitelist, false, true]
+[9, :whitelist, false, true]
+[10, :whitelist, false, true]
+
+========================================
+== Modify tokens per ETH - ok
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [tokens_per_eth acc]  is 20000 as expected
+ok  diff [tokens_per_eth acc] is 10000 as expected
+
+DIFFERENCES
+[:c, :tokens_per_eth, 1.0e-14, 2.0e-14, 1.0e-14]
+
+===============================================================================
+============ Date changes
+===============================================================================
+
+========================================
+== Change dates - ok
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [date_main_start acc]  is 100 as expected
+ok  val [date_main_end acc]  is 200 as expected
+
+DIFFERENCES
+[:c, :date_main_start, 1527861600, 100, -1527861500]
+[:c, :date_main_end, 1529157600, 200, -1529157400]
+
+========================================
+== Wrong date order - too late - fail
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [date_main_start acc]  is 100 as expected
+
+DIFFERENCES
+(no differences found)
+
+========================================
+== Wrong date order - too early - fail
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [date_main_end acc]  is 200 as expected
+
+DIFFERENCES
+(no differences found)
+
+========================================
+== Jump to: epoch 50
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [at_now acc]  is 50 as expected
+
+DIFFERENCES
+[:c, :at_now, 1, 50, 49]
+
+========================================
+== Change presale - fail: before now
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [date_main_start acc]  is 100 as expected
+ok  diff [date_main_start acc] is 0 as expected
+
+DIFFERENCES
+(no differences found)
+
+========================================
+== Jump to: epoch 150
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [at_now acc]  is 150 as expected
+
+DIFFERENCES
+[:c, :at_now, 50, 150, 100]
+
+========================================
+== Change presale - fail: date passed
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [date_main_start acc]  is 100 as expected
+ok  diff [date_main_start acc] is 0 as expected
+
+DIFFERENCES
+(no differences found)
+
+========================================
+== Change some dates - ok
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [date_main_start acc]  is 100 as expected
+ok  val [date_main_end acc]  is 200 as expected
+
+DIFFERENCES
+(no differences found)
+
+Errors found: 0
+
+2018-05-28 09:06:00 UTC

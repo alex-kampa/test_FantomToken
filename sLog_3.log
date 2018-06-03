@@ -1,0 +1,86 @@
+2018-05-28 09:07:11 UTC
+
+========================================
+== Contract Fantom Token initialized
+== 
+At address 0x5d0D003e43d945FaF5F949177760DFb0D94Cd45d
+
+========================================
+== Jump to: epoch 50
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [at_now acc]  is 50 as expected
+
+DIFFERENCES
+[:c, :at_now, 901, 50, -851]
+[10, :locked_tokens, 0.0, 60000000.0, 60000000.0]
+[10, :unlocked_tokens, 70000000.0, 10000000.0, -60000000.0]
+
+===============================================================================
+============ Reset dates
+===============================================================================
+
+========================================
+== Change dates
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [date_main_start acc]  is 1541685600 as expected
+ok  val [date_main_end acc]  is 1542549600 as expected
+
+DIFFERENCES
+[:c, :date_main_start, 100, 1541685600, 1541685500]
+[:c, :date_main_end, 200, 1542549600, 1542549400]
+
+===============================================================================
+============ Before main sale
+===============================================================================
+
+========================================
+== Early contribution (fail)
+== 
+
+ACTIONS
+CONTRIBUTE : @client.transfer(acct_#<Eth::Key:0x00000000041c78a8>, 0x5d0D003e43d945FaF5F949177760DFb0D94Cd45d, 100)
+
+VERIFY
+ok  diff [balance_of acc1] is 0 as expected
+ok  diff [get_balance acc1] is ≈0 as expected (within 0.1 ether)
+
+DIFFERENCES
+[1, :get_balance, 911159.5886707157, 911159.5006707157, -0.088]
+
+========================================
+== Token transfer attempt fails
+== 
+
+ACTIONS
+
+VERIFY
+ok  diff [balance_of acc1] is 0 as expected
+ok  diff [balance_of acc19] is 0 as expected
+
+DIFFERENCES
+[1, :get_balance, 911159.5006707157, 911159.4126707157, -0.088]
+
+========================================
+== Modify tokens per ETH - ok
+== 
+
+ACTIONS
+
+VERIFY
+ok  val [tokens_per_eth acc]  is 10000 as expected
+ok  diff [tokens_per_eth acc] is -10000 as expected
+
+DIFFERENCES
+[:c, :tokens_per_eth, 2.0e-14, 1.0e-14, -1.0e-14]
+
+Errors found: 0
+
+2018-05-28 09:07:50 UTC
